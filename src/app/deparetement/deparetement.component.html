@@ -1,0 +1,80 @@
+<nb-card>
+  <nb-card-body class="example-items-col" style="margin: auto;">
+  <p class="message-menu"> {{ this.message }} </p>
+</nb-card-body>  
+</nb-card>
+
+    <nb-card>
+      <nb-card-body class="example-items-col" style="margin: auto;">  
+        <form #departement="ngForm" (ngSubmit)="createDept(departement.value)">
+          <input type="text" required minlength="7" maxlength="255" name='nom' ngModel nbInput #inputName
+          shape="semi-round" placeholder="Nom du département à ajouter" style="width: 500px;" > 
+        <button nbButton [disabled]="departement.control.invalid && departement.control.dirty" 
+        (click)="inputName.value = ''" outline status="success" size="small"  style="margin-left : 20px;">Ajouter</button>
+        <div *ngIf="departement.control.invalid && departement.control.dirty">
+        <p>  Minimum 7 caracteres ...</p>
+        </div>
+      </form>
+      </nb-card-body>
+    </nb-card>
+  
+
+<nb-card>
+  <nb-card-body class="example-items-col">
+  <ng2-smart-table [settings]="settings" [source]="data"
+  (deleteConfirm)="deleteDept($event)"
+  (editConfirm)="updateDept($event)"
+  (userRowSelect)="onSelect(dialog,$event)"
+  ></ng2-smart-table>
+</nb-card-body>
+</nb-card>
+
+<ng-template #dialog let-ref="dialogRef">
+  <nb-card accent="danger" size="giant">
+    <nb-card-header>Gérer les formations de {{ deptFormations.nom }} :</nb-card-header>
+  
+    <nb-card-body style="margin: auto;">
+      <form #delFormation="ngForm">
+      <p>Sélectionner les formations que vous voulez supprimer de ce département :</p>
+      <nb-select  [(selected)]="selectedDelForms" multiple placeholder="Les formations de ce département ...">
+       <nb-option *ngFor="let item of deptFormations.formations" [(value)]="item.id"> {{ item.nom }} </nb-option>
+     </nb-select>
+    </form>
+
+   </nb-card-body>
+
+   
+
+    <nb-card-body style="margin: auto;">
+      <form #addFormation="ngForm">
+       <p>Sélectionner les formations que vous voulez ajouter à ce département :</p>
+       <nb-select [(selected)]="selectedForms" multiple placeholder="Sélectionner les formations à ajouter">
+        <nb-option *ngFor="let item of dataFormations" value="{{ item.id }}"> {{ item.nom }} </nb-option>
+      </nb-select>
+    </form>
+    </nb-card-body>
+ 
+    <nb-card-body>
+      <nb-card>
+        <nb-card-body class="example-items-col" style="margin: auto;">  
+          <p>Si la formation n'existe pas déjà : (Vous devez rafraichir la page)</p>
+          <form #formation="ngForm" (ngSubmit)="formationService.createForm(formation.value)">
+            <input type="text" required minlength="7" maxlength="255" name='nom' ngModel nbInput #inputName
+            shape="semi-round" placeholder="Nom de la formation à ajouter" style="width: 500px;" > 
+          <button nbButton [disabled]="formation.control.invalid && formation.control.dirty" 
+          (click)="inputName.value = ''" outline status="success" size="small"  style="margin-left : 20px;">Ajouter</button>
+          <div *ngIf="formation.control.invalid && formation.control.dirty">
+          <p>  Minimum 5 caracteres ...</p>
+          </div>
+        </form>
+        </nb-card-body>
+      </nb-card>
+    </nb-card-body>
+    <nb-card-footer style="margin: auto;">
+
+      <a (click)="ref.close()"><button  status="primary" nbButton (click)="onValider()">Valider</button></a>
+      <button style="margin-left: 50px;" status="danger" nbButton (click)="ref.close()">fermer</button>
+      
+    </nb-card-footer>
+  </nb-card>
+</ng-template>

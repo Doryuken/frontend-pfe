@@ -1,0 +1,28 @@
+<nb-card>
+  <nb-card-body class="example-items-col" style="margin: auto;">
+  <p class="message-menu"> {{ this.message }} </p>
+</nb-card-body>  
+</nb-card>
+
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">  
+      <form #formation="ngForm" (ngSubmit)="createForm(formation.value)">
+        <input type="text" required minlength="7" maxlength="255" name='nom' ngModel nbInput #inputName
+        shape="semi-round" placeholder="Nom de la formation à ajouter" style="width: 500px;" > 
+      <button nbButton [disabled]="formation.control.invalid && formation.control.dirty" 
+      (click)="inputName.value = ''" outline status="success" size="small"  style="margin-left : 20px;">Ajouter</button>
+      <div *ngIf="formation.control.invalid && formation.control.dirty">
+      <p>  Minimum 5 caracteres ...</p>
+      </div>
+    </form>
+    </nb-card-body>
+  </nb-card>
+
+<nb-card>
+  <nb-card-body class="example-items-col">
+  <ng2-smart-table [settings]="settings" [source]="data"
+  (deleteConfirm)="deleteForm($event)"
+  (editConfirm)="updateForm($event)"
+  ></ng2-smart-table>
+</nb-card-body>
+</nb-card>

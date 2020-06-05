@@ -1,0 +1,32 @@
+<nb-layout>
+    <nb-layout-header>    
+
+      <div style='margin-right : auto;'>
+        <img style='width: 40%; height: 30%;' src="../../assets/logo.png">
+        <!-- <p class="logo-text">DASHBOARD</p> -->
+      </div>
+     
+      <nb-user style='margin-left: auto;'
+      [name]="username"
+      [title]="email"
+      [nbContextMenu]="items"
+      nbContextMenuTag="my-context-menu">
+      </nb-user>
+       
+  
+    </nb-layout-header>
+   
+    <nb-sidebar subheader>
+      
+      <app-menu></app-menu>
+      
+    </nb-sidebar>
+  
+    <nb-layout-column class="colored-column-basic">
+
+      <div  [nbSpinner]="loading" nbSpinnerStatus="danger">
+      <router-outlet ></router-outlet>
+      </div>
+
+    </nb-layout-column>
+</nb-layout>
