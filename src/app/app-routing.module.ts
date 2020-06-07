@@ -1,3 +1,4 @@
+import { DepartementidComponent } from './departementid/departementid.component';
 import { EtudiantComponent } from './etudiant/etudiant.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
 import { GroupeComponent } from './groupe/groupe.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
      canActivate : [AuthguardService],
      children : [
   { path: 'departement', component: DeparetementComponent },
+  { path: 'departement/:id', component: DepartementidComponent },
   { path: 'formation', component : FormationComponent },
   { path: 'niveau', component : NiveauComponent },
   { path: 'module', component : ModuleComponent },

@@ -10,7 +10,7 @@ import { CrudService } from './../services/crud.service';
   styleUrls: ['./formation.component.scss']
 })
 export class FormationComponent implements OnInit {
-  public url = 'http://localhost:1337/formations';
+  public url = '/formations';
 
   message = 'Gestion de la table formation :';
 
@@ -61,21 +61,20 @@ export class FormationComponent implements OnInit {
   createForm(event)
   {
      this.crud.createMethod(this.url,event)
-    .subscribe(res => { this.ngOnInit(); }, error => {
+    .subscribe(( res  : formationModel )=> { 
+      this.ngOnInit(); }, error => {
       this.inputName = '';
       this.ngOnInit();
     });
- 
+  
   }
   
   deleteForm(event)
   {
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
       this.crud.deleteMethod(this.url,event.data.id)
-      .subscribe(res => { this.ngOnInit(); }, error => {
-        this.ngOnInit();
-        event.confirm.resolve();
-      });
+      .subscribe(res => this.ngOnInit(), error => this.ngOnInit());
+      event.confirm.resolve();
     } else {
       event.confirm.reject();
     }
@@ -86,10 +85,8 @@ export class FormationComponent implements OnInit {
     
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
       this.crud.updateMethod(this.url,event.newData.id,event.newData)
-      .subscribe(res => { this.ngOnInit(); }, error => {
-        event.confirm.resolve();
-        this.ngOnInit();
-      });
+      .subscribe(res => this.ngOnInit(), error => this.ngOnInit());
+      event.confirm.resolve();
     } else {
       event.confirm.reject();
     }

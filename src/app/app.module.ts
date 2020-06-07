@@ -25,6 +25,7 @@ import { ModuleComponent } from './module/module.component';
 import { GroupeComponent } from './groupe/groupe.component';
 import { EnseignantComponent } from './enseignant/enseignant.component';
 import { EtudiantComponent } from './etudiant/etudiant.component';
+import { DepartementidComponent } from './departementid/departementid.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { EtudiantComponent } from './etudiant/etudiant.component';
     GroupeComponent,
     EnseignantComponent,
     EtudiantComponent,
+    DepartementidComponent,
     
   ],
   imports: [

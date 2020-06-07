@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./niveau.component.scss']
 })
 export class NiveauComponent implements OnInit {
-  public url = 'http://localhost:1337/niveaus';
+  public url = '/niveaus';
 
   message = 'Gestion de la table niveau :';
   data;
@@ -68,10 +68,8 @@ export class NiveauComponent implements OnInit {
   {
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
       this.crud.deleteMethod(this.url,event.data.id)
-      .subscribe(res => { this.ngOnInit(); }, error => {
-        this.ngOnInit();
-        event.confirm.resolve();
-      });
+      .subscribe(res =>  this.ngOnInit() , error => this.ngOnInit());
+      event.confirm.resolve();
     } else {
       event.confirm.reject();
     }
@@ -82,10 +80,8 @@ export class NiveauComponent implements OnInit {
     
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
       this.crud.updateMethod(this.url,event.newData.id,event.newData)
-      .subscribe(res => { this.ngOnInit(); }, error => {
-        event.confirm.resolve();
-        this.ngOnInit();
-      });
+      .subscribe(res =>  this.ngOnInit() , error => this.ngOnInit());
+      event.confirm.resolve();
     } else {
       event.confirm.reject();
     }

@@ -9,30 +9,30 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class CrudService {
-
- 
+  public api = 'http://localhost:1337'; 
+   
   constructor(private http: HttpClient) { }
 
   getMethod(url){
-   return this.http.get(url).pipe(catchError(this.handleError));
+   return this.http.get(`${this.api}${url}`).pipe(catchError(this.handleError));
   }
   getOneMethod(url,id){
-    return this.http.get(`${url}/${id}`).pipe(catchError(this.handleError));
+    return this.http.get(`${this.api}${url}/${id}`).pipe(catchError(this.handleError));
   }
 
   countMethod(url){
-    return this.http.get(`${url}/count`).pipe(catchError(this.handleError));
+    return this.http.get(`${this.api}${url}/count`).pipe(catchError(this.handleError));
   }
 
   createMethod(url,ctx){
-    return this.http.post(url,ctx).pipe(catchError(this.handleError));
+    return this.http.post(`${this.api}${url}`,ctx).pipe(catchError(this.handleError));
   }
 
   deleteMethod(url, id : number){
-    return this.http.delete(`${url}/${id}`).pipe(catchError(this.handleError));
+    return this.http.delete(`${this.api}${url}/${id}`).pipe(catchError(this.handleError));
   }
   updateMethod(url, id : number,ctx){
-    return this.http.put(`${url}/${id}`,ctx).pipe(catchError(this.handleError));
+    return this.http.put(`${this.api}${url}/${id}`,ctx).pipe(catchError(this.handleError));
   }
   handleError(error: HttpErrorResponse) {
     return throwError(error);
