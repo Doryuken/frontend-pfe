@@ -2,10 +2,10 @@
     <nb-layout-header>    
 
       <div style='margin-right : auto;'>
-        <img style='width: 40%; height: 30%;' src="../../assets/logo.png">
-        <!-- <p class="logo-text">DASHBOARD</p> -->
+     <a href="#"><img style='width: 40%; height: 30%;' src="../../assets/logo.png"></a> 
       </div>
-     
+    
+      
       <nb-user style='margin-left: auto;'
       [name]="username"
       [title]="email"
@@ -17,14 +17,15 @@
     </nb-layout-header>
    
     <nb-sidebar subheader>
-      
-      <app-menu></app-menu>
+
+      <app-menu-ens *ngIf="!isAdmin && isAdmin !== null"></app-menu-ens>
+      <app-menu *ngIf="isAdmin && isAdmin !== null"></app-menu>
       
     </nb-sidebar>
   
     <nb-layout-column class="colored-column-basic">
 
-      <div  [nbSpinner]="loading" nbSpinnerStatus="danger">
+      <div  [nbSpinner]="loading" nbSpinnerStatus="primary">
       <router-outlet ></router-outlet>
       </div>
 

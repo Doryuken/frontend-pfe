@@ -1,0 +1,27 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+  </nb-card>
+  
+  <nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <form [formGroup]="inscription" (ngSubmit)="onSubmit()">
+      <input  type="text" nbInput  status="primary" formControlName="nom" fullWidth placeholder="Nom"> <br>
+      <input  style="margin-top: 15px;" type="text" nbInput  status="primary" fullWidth formControlName="prenom" placeholder="Prénom"> <br>
+      <input  style="margin-top: 15px;" type="email" nbInput  status="primary" fullWidth formControlName="email"  placeholder="Email (assurez vous d'entrer un email valide)"> <br>
+      <input  style="margin-top: 15px;" type="text" nbInput  status="primary" fullWidth formControlName="username" placeholder="Nom d'utilisateur (5 caractères mini)"> <br>
+      <input  style="margin-top: 15px;" type="text" nbInput  status="primary" fullWidth formControlName="password" placeholder="Mot de passe (8 caractères mini)"> <br>
+      <button style="margin-top : 25px;" shape="semi-round" status="info"   fullWidth nbButton 
+      [disabled]="!inscription.valid"
+      type="submit">Ajouter & Créer le compte !</button>
+    </form>
+    <br>
+    <p *ngIf="!inscription.valid" style="color : red;"> Le formulaire n'est pas valide, assurez vous de corriger les erreurs !</p>
+    <p *ngIf="inscription.get('nom').invalid && inscription.get('nom').dirty" style="color : red;"> Nom invalide !</p>
+    <p *ngIf="inscription.get('prenom').invalid && inscription.get('prenom').dirty" style="color : red;"> Prenom invalide !</p>
+    <p *ngIf="inscription.get('email').invalid && inscription.get('email').dirty" style="color : red;"> E-mail invalide !</p>
+    <p *ngIf="inscription.get('username').invalid && inscription.get('username').dirty" style="color : red;"> Nom d'utilisateur invalide !</p>
+    <p *ngIf="inscription.get('password').invalid && inscription.get('password').dirty" style="color : red;"> Mot de passe invalide !</p>    
+  </nb-card-body>  
+  </nb-card>

@@ -1,0 +1,34 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+</nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto; width : 30%">
+
+      <form [formGroup]="ajoutEtudiant" (ngSubmit)="onSubmit()">
+        <input style="margin-top : 25px" type="text" nbInput  status="primary" formControlName="nom"
+         fullWidth placeholder="Nom (3 caractères mini)"> 
+        <input style="margin-top : 25px" type="text" nbInput  status="primary" formControlName="prenom"
+         fullWidth placeholder="Prenom (3 caractères mini)"> 
+        <input  style="margin-top : 25px" type="text" nbInput  status="primary" formControlName="matricule"
+         fullWidth placeholder="Matricule"> 
+        <input style="margin-top : 25px" type="date" nbInput  status="primary" formControlName="birthdate"
+         fullWidth placeholder="Date de naissance"> 
+        
+        <button style="margin-top : 25px;" shape="semi-round" status="info" fullWidth nbButton 
+          [disabled]="!ajoutEtudiant.valid"
+          type="submit">Créer l'étudiant!</button>
+      </form>
+  </nb-card-body>  
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col">
+    <ng2-smart-table [settings]="settings" [source]="data"
+    (deleteConfirm)="deleteEtudiant($event)"
+    (editConfirm)="editEtudiant($event)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>

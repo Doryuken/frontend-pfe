@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+     
+        <form [formGroup]="ajoutGroupe" (ngSubmit)="onSubmit()">
+            <input  type="text" nbInput  status="primary" formControlName="nom"
+             fullWidth placeholder="Nom du groupe à ajouter .."> 
+            
+            <button style="margin-top : 25px;" shape="semi-round" status="info" fullWidth nbButton 
+              [disabled]="!ajoutGroupe.valid"
+              type="submit">Créer le niveau !</button>
+          </form>
+        
+  </nb-card-body>  
+  </nb-card>
+
+
+  <nb-card>
+    <nb-card-body class="example-items-col">
+    <ng2-smart-table [settings]="settings" [source]="data"
+    (deleteConfirm)="deleteGroupe($event)"
+    (editConfirm)="editGroupe($event)"
+    (userRowSelect)="selectGroupe($event.data.id)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>
+  

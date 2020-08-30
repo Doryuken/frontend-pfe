@@ -1,0 +1,39 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+        <p> Filter par niveau : </p>
+        <form #selected="ngForm" (ngSubmit)="onClickCharger(selected)">
+        <nb-select  required ngModel name="selectedOption" fullWidth placeholder="Choisissez le niveau">
+            <nb-option *ngFor="let item of niveaux" value="{{item.id}}"> {{ item.Nom }} </nb-option>
+          </nb-select>
+
+          <button [disabled]="!selected.valid" style="margin-top: 30px;" fullWidth nbButton type="submit"
+            shape="semi-round" status="info">Charger les étudiants du niveau</button>
+        </form>
+  </nb-card-body>  
+  </nb-card>
+
+  <p>Cliquez sur un étudiant pour l'ajouter au groupe :</p>
+  <nb-card>
+    <nb-card-body class="example-items-col">
+    <ng2-smart-table  [settings]="settings" [source]="data"
+    (userRowSelect)="selectEtudiant($event.data.id)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>
+
+  <p>Les étudiants de ce groupe :</p>
+  <nb-card>
+    <nb-card-body class="example-items-col">
+    <ng2-smart-table  [settings]="settings2" [source]="data2"
+    (deleteConfirm)="deleteEtudiant($event)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>
+
+  

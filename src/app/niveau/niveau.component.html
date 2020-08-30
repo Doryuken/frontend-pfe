@@ -1,28 +1,32 @@
 <nb-card>
     <nb-card-body class="example-items-col" style="margin: auto;">
     <p class="message-menu"> {{ this.message }} </p>
-</nb-card-body>  
-</nb-card>
-
-<nb-card>
-    <nb-card-body class="example-items-col" style="margin: auto;">  
-      <form #niveau="ngForm" (ngSubmit)="createniv(niveau.value)">
-        <input type="text" required minlength="2" maxlength="255" name='nom' ngModel nbInput #inputName
-        shape="semi-round" placeholder="Nom du niveau à ajouter" style="width: 500px;" > 
-      <button nbButton [disabled]="niveau.control.invalid && niveau.control.dirty" 
-      (click)="inputName.value = ''" outline status="success" size="small"  style="margin-left : 20px;">Ajouter</button>
-      <div *ngIf="niveau.control.invalid && niveau.control.dirty">
-      <p>  Minimum 2 caracteres ...</p>
-      </div>
-    </form>
-    </nb-card-body>
+  </nb-card-body>  
   </nb-card>
 
-<nb-card>
+  <nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+     
+        <form [formGroup]="ajoutNiveau" (ngSubmit)="onSubmit()">
+            <input  type="text" nbInput  status="primary" formControlName="nom"
+             fullWidth placeholder="Nom du niveau à ajouter .."> 
+            
+            <button style="margin-top : 25px;" shape="semi-round" status="info" fullWidth nbButton 
+              [disabled]="!ajoutNiveau.valid"
+              type="submit">Créer le niveau !</button>
+          </form>
+        
+  </nb-card-body>  
+  </nb-card>
+
+
+  <nb-card>
     <nb-card-body class="example-items-col">
-  <ng2-smart-table [settings]="settings" [source]="data"
-  (deleteConfirm)="deleteniv($event)"
-  (editConfirm)="updateniv($event)"
-  ></ng2-smart-table>
-</nb-card-body>
-</nb-card>
+    <ng2-smart-table [settings]="settings" [source]="data"
+    (deleteConfirm)="deleteNiveau($event)"
+    (editConfirm)="editNiveau($event)"
+    (userRowSelect)="selectNiveau($event.data.id)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>
+  

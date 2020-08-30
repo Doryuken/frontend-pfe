@@ -1,0 +1,42 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> Mon profile :  </p>
+  </nb-card-body>  
+</nb-card>
+
+<nb-card>
+<nb-card-body style="margin: auto;">
+    <nb-card>
+        <nb-card-body style="margin: auto;">
+    <nb-user size="large"
+         name="{{ nom }} {{ prenom }}"
+         [title]="email">                     
+    </nb-user>
+        </nb-card-body>
+    </nb-card>
+
+    <nb-card>
+        <nb-card-body class="example-items-col" style="margin: auto;">
+        <p style="color:rgb(8, 211, 238); text-shadow: 0.25px 0.25px black;"> Date de création du compte : {{ created_at | date}} </p>
+        <p style="color:rgb(8, 211, 238); text-shadow: 0.25px 0.25px black;"> Dernière mise à jour le : {{ updated_at | date}} </p>
+      </nb-card-body>  
+    </nb-card>
+    
+
+   <nb-card  style="margin-top : 50px;">
+   <nb-card-body>
+       <p style="margin-left : 12%; font-weight: bold; color:rgb(8, 211, 238); text-shadow: 0.25px 0.25px black;"> Changer votre mot de passe : </p>
+    <form [formGroup]="passForm" (ngSubmit)="onSubmit()" >
+        <input  type="text" nbInput  status="primary" formControlName="new"  fullWidth placeholder="Nouveau mot de passe"> <br>
+        <input  style="margin-top: 15px;" type="text" nbInput  status="primary" formControlName="confirm" fullWidth placeholder="Confirmer le mot de passe"> <br>
+        <p *ngIf="passForm.get('new').value !== passForm.get('confirm').value" style="margin-top: 15px; color:red; margin-left: 30%;"> Non identiques </p>
+        <p *ngIf="(!passForm.get('new').valid && passForm.get('new').dirty)|| (!passForm.get('confirm').valid && passForm.get('confirm').dirty)" style="margin-top: 15px; color:red; margin-left: 30%;"> 7 caractères au minimum </p>
+        <button style="margin-top : 15px; margin-left: 23%;" shape="semi-round" status="info"    nbButton 
+        [disabled]="!passForm.valid || passForm.get('new').value !== passForm.get('confirm').value"
+        type="submit">Mettre à jour</button>
+    </form>
+    </nb-card-body>
+  </nb-card>
+
+</nb-card-body>
+</nb-card>

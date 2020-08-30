@@ -8,7 +8,7 @@ import { NbSidebarService } from '@nebular/theme';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'Gestion du SYS-PG';
   loading : boolean = false;
   constructor(private sidebarService: NbSidebarService,
     private router : Router) {

@@ -1,3 +1,4 @@
+import { JwtService } from './jwt.service';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -10,14 +11,15 @@ export class AuthguardService implements CanActivate {
 
 
   constructor(
-    public auth: AuthService,
-    public router: Router
+    private jwtServ : JwtService,
+    private auth: AuthService,
+    private router: Router
   ) {}
   
-  canActivate(
+    canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.auth.isloggedIn() !== true) {
+    if (this.auth.isloggedIn() !== true || !this.jwtServ.isTokenValid(localStorage.getItem('token'))) {
       window.alert('Vous devez être connecté !');
       this.router.navigate(['']);
     }

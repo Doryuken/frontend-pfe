@@ -1,0 +1,29 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+</nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+      <form [formGroup]="ajoutModule" (ngSubmit)="onSubmit()">
+        <input  type="text" nbInput  status="primary" formControlName="nom"
+         fullWidth placeholder="Nom du module (4 caractères mini)"> 
+        
+        <button style="margin-top : 25px;" shape="semi-round" status="info" fullWidth nbButton 
+          [disabled]="!ajoutModule.valid"
+          type="submit">Créer le module !</button>
+      </form>
+  </nb-card-body>  
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col">
+    <ng2-smart-table [settings]="settings" [source]="data"
+      (deleteConfirm)="deleteModule($event)"
+      (editConfirm)="editModule($event)"
+      (userRowSelect)="selectModule($event.data.id)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>
+ 

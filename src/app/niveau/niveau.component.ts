@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { CrudService } from './../services/crud.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
-
+import { CrudService } from '../services/crud.service';
+import { NbToastrService } from '@nebular/theme';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-niveau',
@@ -10,17 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./niveau.component.scss']
 })
 export class NiveauComponent implements OnInit {
-  public url = '/niveaus';
-
-  message = 'Gestion de la table niveau :';
+  ajoutNiveau : FormGroup = new FormGroup({
+    nom : new FormControl('', [Validators.required, Validators.minLength(2)]),
+  })
+  public url = 'niveaus';
   data;
-  inputName:string;
+  message = 'Gérer les niveaux de votre département :';
   settings = {
     columns: {
-      id: {
-        title: 'ID'
-      },
-      nom: {
+      Nom: {
         title: 'Nom'
       }},
 
@@ -38,62 +36,83 @@ export class NiveauComponent implements OnInit {
         add : false
               },
     pager : {
-        display : true,
-        perPage : 10
-            }
+      display : true,
+      perPage : 10
+
+    }
   };
- 
-  constructor(
-    private http : HttpClient,
-    private crud :  CrudService) {}
- 
-  getnivs()
-  {
-      this.crud.getMethod(this.url)
-      .subscribe(response  => {
-         this.data = response; });
+  
+  showToast(status, message) {
+    this.toastrService.show(status, message, { status });
   }
 
-  createniv(event)
-  {
-     this.crud.createMethod(this.url,event)
-    .subscribe(res => { this.ngOnInit(); }, error => {
-      this.inputName = '';
-      this.ngOnInit();
-    });
- 
+ constructor(
+    private route : Router,
+    private toastrService : NbToastrService,
+    private crud :  CrudService) {}
+
+  ngOnInit(): void {
+    this.getNiveaux()
   }
-  
-  deleteniv(event)
+ 
+  getNiveaux()
   {
+    this.crud.getMethod(this.url)
+    .subscribe(res => this.data = res);
+  }
+ 
+  onSubmit(){
+    const niveau = { Nom : this.ajoutNiveau.value.nom };
+    if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
+    this.crud.createMethod(this.url, niveau)
+    .subscribe(() => { this.showToast('success', "Le niveau a bien été créé !"); this.ngOnInit(); } ,
+               () => { 
+                 this.showToast('warning', "Une erreur s'est produite, veuillez réessayer ..");
+                 this.ngOnInit(); 
+                })
+  }}
+
+  deleteNiveau(event){
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
       this.crud.deleteMethod(this.url,event.data.id)
-      .subscribe(res =>  this.ngOnInit() , error => this.ngOnInit());
+      .subscribe(res =>  {
+            this.showToast('success', 'Niveau supprimé avec succés !');
+            this.ngOnInit()
+          }, () => {
+            this.showToast('warning', "Une erreur s'est produite, veuillez réessayer !");     
+            this.ngOnInit();
+          });
+         
       event.confirm.resolve();
-    } else {
-      event.confirm.reject();
     }
-   
+      else 
+      event.confirm.reject();
   }
-  updateniv(event)
-  {
-    
+
+  editNiveau(event){
+
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
       this.crud.updateMethod(this.url,event.newData.id,event.newData)
-      .subscribe(res =>  this.ngOnInit() , error => this.ngOnInit());
+      .subscribe(
+        res => 
+        { 
+          this.showToast('success', 'Niveau modifié avec succés !');
+          this.ngOnInit() 
+        }, 
+        error => {
+          this.showToast('warning', "Une erreur s'est produite, veuillez réessayer !");
+          this.ngOnInit()
+        });
+      
       event.confirm.resolve();
-    } else {
+    }
+      else {
       event.confirm.reject();
     }
+
+  }
+  selectNiveau(id){
+    this.route.navigate(['CMS/niveau-mod',id]);
   }
   
-  ngOnInit(): void {
-    this.getnivs();
-  }
-
-}
-
-interface niveauModel{
-  id : number,
-  nom : string
 }

@@ -1,0 +1,16 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body style="width : 50%; margin : auto" class="example-items-col">
+    <ng2-smart-table [settings]="settings" [source]="data"
+    (userRowSelect)="onSelect($event.data.id)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>
+  <!-- (deleteConfirm)=""
+  (editConfirm)=""
+  (userRowSelect)="" -->

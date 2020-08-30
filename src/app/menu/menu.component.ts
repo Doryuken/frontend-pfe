@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { NbMenuItem} from '@nebular/theme';
 
 @Component({
@@ -7,52 +7,49 @@ import { NbMenuItem} from '@nebular/theme';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent  {
 
-  items: NbMenuItem[] = [
-    { 
-      title: 'Gestion des tables',
+  export class MenuComponent implements OnInit {
+
+  admin: NbMenuItem[] = [
+    {  
+      title: 'Gérer les enseignants',
+      icon: 'settings-outline',
+      expanded : true,
+      children : [ 
+        {
+        title : 'Nos Enseignants',
+        link : 'liste-enseignant', 
+        icon: 'arrow-ios-forward-outline',
+        },
+        {
+          title : 'Ajouter Enseignant', 
+          link : 'ajouter-enseignant', 
+          icon: 'arrow-ios-forward-outline',
+          },
+
+      ]},
+    {  
+      title: 'Gérer les formations',
       icon: 'settings-outline',
       expanded : true,
       children : [
-    {  
-      title: 'Départements',
-      icon: 'settings-outline',
-      link : 'departement',
+        {
+          title : 'Niveaux & Modules',
+          link : 'niveau',
+          icon: 'arrow-ios-forward-outline',
+        },
+        {
+          title : 'Etudiants',
+          link : 'etudiant',
+          icon: 'arrow-ios-forward-outline',
+        }
+      ]
+     
     },
-    {
-      title: 'Formations',
-      icon: 'settings-outline',
-      link : 'formation'
-    },
-  
-    {
-          title: 'Niveaux',
-          icon: 'settings-outline',
-          link : 'niveau'
-     },
-    {
-          title: 'Modules',
-          icon: 'settings-outline',
-          link : 'module'
-     },
-    {
-          title: 'Groupes',
-          icon: 'settings-outline', 
-          link : 'groupe'
-    },
-    {
-         title: 'Enseignants',
-         icon: 'settings-outline',
-         link : 'enseignant'
-    },
-    {
-         title: 'Etudiants',
-         icon: 'settings-outline',
-         link : 'etudiant'
-    },
-     ]}
-    ];
+   
+    ]
+    constructor (){ }
+
+    ngOnInit(){}
+
 }
-
-

@@ -1,0 +1,36 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+        <p> Filtre par module : </p>
+        <form [formGroup]="filterSeances" (ngSubmit)="onClickSelected(filterSeances)">
+        <nb-select  (selectedChange)="refreshGroupe($event)" required  formControlName="module" fullWidth placeholder="Choisissez le module">
+            <nb-option *ngFor="let item of modules" value="{{item.id}}"> {{ item.Nom }} - {{ item.niveau.Nom }} </nb-option>
+          </nb-select>
+        <p> puis par groupe : </p>
+        <nb-select  required formControlName="groupe" fullWidth placeholder="Choisissez le groupe">
+            <nb-option *ngFor="let item of groupes" value="{{item.id}}"> {{ item.Nom }} </nb-option>
+          </nb-select>
+
+          <button [disabled]="!filterSeances.valid" style="margin-top: 30px;" fullWidth nbButton type="submit"
+            shape="semi-round" status="info">Charger les séances : </button>
+        </form>
+  </nb-card-body>  
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col">
+    <ng2-smart-table  [settings]="settings" [source]="data"
+    (userRowSelect)="selectSeance($event.data.id)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>
+  <button style="margin-top : 10px;" shape="semi-round" status="info" fullWidth nbButton 
+  (click)="exportToExcel()"
+  [disabled]="data == null">Export to XLS</button>
+
+

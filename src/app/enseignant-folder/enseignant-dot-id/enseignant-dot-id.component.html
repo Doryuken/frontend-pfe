@@ -1,0 +1,29 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+  </nb-card>
+
+  <nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+        <p> Ajouter un module à cet Enseignant : </p>
+        <form #selected="ngForm" (ngSubmit)="onClickAdd(selected)">
+        <nb-select  required ngModel name="selectedOption" fullWidth placeholder="Choisissez le module">
+            <nb-option *ngFor="let item of modules" value="{{item.id}}"> {{ item.Nom }} - {{ item.niveau.Nom }}  </nb-option>
+          </nb-select>
+
+          <button [disabled]="!selected.valid" style="margin-top: 30px;" fullWidth nbButton type="submit"
+            shape="semi-round" status="info">Ajouter</button>
+        </form>
+  </nb-card-body>  
+  </nb-card>
+  
+  <nb-card>
+    <nb-card-body class="example-items-col">
+    <ng2-smart-table  [settings]="settings" [source]="data"
+        (deleteConfirm)="deleteModule($event)"
+        (userRowSelect)="selectModule($event.data.id)"
+    ></ng2-smart-table>
+  </nb-card-body>
+  </nb-card>
+

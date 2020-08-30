@@ -1,0 +1,19 @@
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+    <p class="message-menu"> {{ this.message }} </p>
+  </nb-card-body>  
+</nb-card>
+
+<nb-card>
+    <nb-card-body class="example-items-col" style="margin: auto;">
+     <p> Liste des enseignants chargés de ce module : </p>
+     <nb-card>
+        <nb-card-body  class="example-items-col" >
+        <ng2-smart-table [settings]="settings" [source]="data"
+        (userRowSelect)="goToEnseignant($event.data.id)"
+        ></ng2-smart-table>
+      </nb-card-body>
+      </nb-card>
+    </nb-card-body>  
+</nb-card>
+
