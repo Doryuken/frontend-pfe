@@ -14,7 +14,7 @@ export class EnseignantComponent implements OnInit {
   private url = 'enseignants';
   data : any = [];
  
-  message = 'Gérer les enseignants de votre département :';
+  message = 'Gérer les enseignants de votre département';
 
   settings = {
     columns: {
@@ -33,11 +33,15 @@ export class EnseignantComponent implements OnInit {
     noDataMessage : 'Aucune donnée trouvée',
     delete : {
       confirmDelete : true,
+      deleteButtonContent : 'Supprimer'
       
     },
     hideSubHeader : false,
     edit: {
       confirmSave: true,
+      editButtonContent : 'Modifier',
+      saveButtonContent : 'Enregistrer',
+      cancelButtonContent : 'Annuler',
     },
     actions : {
         position : 'right',

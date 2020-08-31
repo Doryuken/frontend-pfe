@@ -11,7 +11,7 @@ export class MenuEnsComponent implements OnInit {
 
   enseignant: NbMenuItem[] = [ 
         {
-        title : 'Mon profile',
+        title : 'Mon profil',
         icon: 'person-outline',
         link : 'my-profile', 
         },

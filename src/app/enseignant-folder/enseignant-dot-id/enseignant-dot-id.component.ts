@@ -27,6 +27,7 @@ export class EnseignantDotIdComponent implements OnInit {
     noDataMessage : 'Aucune donnée trouvée',
     delete : {
       confirmDelete : true,
+      deleteButtonContent : 'Supprimer'
     },
     hideSubHeader : false,
     actions : {

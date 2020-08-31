@@ -15,7 +15,7 @@ export class NiveauComponent implements OnInit {
   })
   public url = 'niveaus';
   data;
-  message = 'Gérer les niveaux de votre département :';
+  message = 'Gérer les niveaux de votre département';
   settings = {
     columns: {
       Nom: {
@@ -25,11 +25,15 @@ export class NiveauComponent implements OnInit {
     noDataMessage : 'Aucune donnée trouvée',
     delete : {
       confirmDelete : true,
+      deleteButtonContent : 'Supprimer'
       
     },
     hideSubHeader : false,
     edit: {
       confirmSave: true,
+      editButtonContent : 'Modifier',
+      saveButtonContent : 'Enregistrer',
+      cancelButtonContent : 'Annuler',
     },
     actions : {
         position : 'right',

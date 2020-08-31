@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class MesModulesComponent implements OnInit {
   tokenID = jwt_decode(localStorage.getItem('token')).id;
   url : string = 'modules'; 
-  message : string = "Mes modules :";
+  message : string = "Mes modules";
   data;
   settings = {
     columns: {
@@ -27,6 +27,7 @@ export class MesModulesComponent implements OnInit {
     noDataMessage : 'Aucune donnée trouvée',
     delete : {
       confirmDelete : true,
+      deleteButtonContent : 'Supprimer'
     },
     hideSubHeader : false,
     actions : {

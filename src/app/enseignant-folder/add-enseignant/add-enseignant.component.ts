@@ -22,7 +22,7 @@ export class AddEnseignantComponent implements OnInit {
       password : new FormControl([],[Validators.required, Validators.minLength(8)]),
     }
   );
-  message = "Ajouter un enseignant :";
+  message = "Ajouter un enseignant";
 
   constructor(
     private toastrService : NbToastrService,

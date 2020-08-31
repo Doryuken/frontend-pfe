@@ -13,7 +13,7 @@ export class EtudiantComponent implements OnInit {
   
   public url = 'etudiants';
   data;
-  message = 'Veuillez sélectionner un niveau précis  :';
+  message = 'Veuillez sélectionner un niveau précis';
   settings = {
     columns: {
       Nom: {
@@ -25,11 +25,15 @@ export class EtudiantComponent implements OnInit {
     noDataMessage : 'Aucune donnée trouvée',
     delete : {
       confirmDelete : true,
+      deleteButtonContent : 'Supprimer'
       
     },
     hideSubHeader : false,
     edit: {
       confirmSave: true,
+      editButtonContent : 'Modifier',
+      saveButtonContent : 'Enregistrer',
+      cancelButtonContent : 'Annuler',
     },
     actions : {
         position : 'right',

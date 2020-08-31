@@ -24,7 +24,7 @@ export class MesSeancesComponent implements OnInit {
   groupes;
   data; 
  
-  message = "Gérer vos séances : ";
+  message = "Gérer mes séances";
   settings = {
     columns: {
       Code: {
@@ -38,6 +38,7 @@ export class MesSeancesComponent implements OnInit {
     noDataMessage : 'Aucune donnée trouvée',
     delete : {
       confirmDelete : true,
+      deleteButtonContent : 'Supprimer'
     },
     hideSubHeader : false,
     actions : {

@@ -23,7 +23,7 @@ export class SeancesIdComponent implements OnInit {
   moduleName = '';
   groupeName = '';
   nbrPresence : number;
-  message = 'Gérer les présences : ';
+  message = 'Gérer les présences';
   settings = {
     columns: {
       Matricule : {
@@ -42,6 +42,7 @@ export class SeancesIdComponent implements OnInit {
     noDataMessage : 'Aucune donnée trouvée',
     delete : {
       confirmDelete : true,
+      deleteButtonContent : 'Supprimer'
       
     },
     hideSubHeader : false,
