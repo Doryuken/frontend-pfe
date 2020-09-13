@@ -44,7 +44,7 @@ export class MyProfileComponent implements OnInit {
     const ctx = { password : this.passForm.value.new }; 
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
     this.crud.updateMethod('users','me',ctx)
-    .subscribe(() => this.showToast('success', 'Mot de passe mit à jour')
+    .subscribe(() => { this.passForm.reset(''); this.showToast('success', 'Mot de passe mit à jour'); }
     ,() => this.showToast('warning', 'Erreur, veuillez réessayer ..'))
    }}
 }

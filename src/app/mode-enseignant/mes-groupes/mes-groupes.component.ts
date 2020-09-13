@@ -71,7 +71,10 @@ export class MesGroupesComponent implements OnInit {
   {
     this.getEnseignant()
     .subscribe( (res : { groupes : [] } ) => 
-    { this.data = res[0].groupes; });
+    {
+      const groupes = res[0].groupes;       
+      this.data = groupes.filter(e => e.module == this.id);
+     }, () => this.showToast('warning','Erreur lors du chargement des groupes ...'));
   }
   
   getModuleName(){
@@ -86,7 +89,7 @@ export class MesGroupesComponent implements OnInit {
                      enseignant : { id : res[0].id}};
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
     this.crud.createMethod(this.url, groupe)
-    .subscribe(() => { this.showToast('success', "Le groupe a bien été créé !"); this.ngOnInit(); } ,
+    .subscribe(() => { this.ajoutGroupe.reset(''); this.showToast('success', "Le groupe a bien été créé !"); this.ngOnInit(); } ,
                () => { 
                  this.showToast('warning', "Une erreur s'est produite, veuillez réessayer ..");
                  this.ngOnInit(); 

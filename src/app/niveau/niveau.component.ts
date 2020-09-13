@@ -69,7 +69,7 @@ export class NiveauComponent implements OnInit {
     const niveau = { Nom : this.ajoutNiveau.value.nom };
     if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
     this.crud.createMethod(this.url, niveau)
-    .subscribe(() => { this.showToast('success', "Le niveau a bien été créé !"); this.ngOnInit(); } ,
+    .subscribe(() => { this.ajoutNiveau.reset(''); this.showToast('success', "Le niveau a bien été créé !"); this.ngOnInit(); } ,
                () => { 
                  this.showToast('warning', "Une erreur s'est produite, veuillez réessayer ..");
                  this.ngOnInit(); 

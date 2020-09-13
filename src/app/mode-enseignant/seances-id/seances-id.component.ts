@@ -115,6 +115,7 @@ export class SeancesIdComponent implements OnInit {
       (this.seance as seanceModel).etudiants.push(res[0]);
       this.crud.updateMethod(this.url,this.id, this.seance)
       .subscribe(() => { 
+        this.ajoutSeance.reset('');
         this.showToast('success', `Présence ajoutée !`);
         this.ngOnInit(); },
         () => {this.showToast('warning', 'Erreur, veuillez réessayer ...'); this.ngOnInit() ;});}

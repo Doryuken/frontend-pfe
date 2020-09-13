@@ -58,10 +58,10 @@ export class EnseignantDotIdComponent implements OnInit {
   }
 
   onClickAdd(form){ 
-  let ctx = {  modules : { id : form.value.selectedOption}  };
-
+  let ensModules = this.data;
+  ensModules.push(form.value.selectedOption);
   if (window.confirm('Êtes-vous sûr de vouloir continuer ?')) {
-  this.crud.updateMethod(this.url,this.id,ctx)
+  this.crud.updateMethod(this.url,this.id, { modules : ensModules })
   .subscribe(() => { 
     this.showToast('success', `Le module a bien été ajouté !`);
     this.ngOnInit();
